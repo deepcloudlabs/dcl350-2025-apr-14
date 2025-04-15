@@ -16,6 +16,7 @@ import com.example.ddd.Entity;
 //              -- 3 --> behavior -> business method
 @Entity(identity = { "identity" }, aggregate = true)
 public class Employee {
+	private static final Salary MIN_SALARY = Salary.of(25_000, FiatCurrency.YTL);
 	private TcKimlikNo identity;
 	private FullName fullName;
 	private Salary salary;
@@ -98,6 +99,11 @@ public class Employee {
 		// invariants
 		// constraints
 		// policies/standards/regulations
+		if (this.departments.stream().anyMatch(Department.IT::equals) && this.jobStyle == JobStyle.FULL_TIME) {
+			// POLICY 100
+			if (newSalary.lessThan(MIN_SALARY.multiply(Rate.of(3.0).getPercent())))
+				throw new IllegalArgumentException("Violates POLICY 100");
+		}
 		this.salary = newSalary;
 	} 
 	public static class Builder {
