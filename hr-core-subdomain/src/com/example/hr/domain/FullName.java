@@ -8,8 +8,8 @@ import com.example.ddd.ValueObject;
 @ValueObject
 public record FullName(String firstName, String lastName) {
 	public static FullName valueOf(String firstName, String lastName) {
-		Objects.nonNull(firstName);
-		Objects.nonNull(lastName);
+		Objects.requireNonNull(firstName);
+		Objects.requireNonNull(lastName);
 		return new FullName(firstName, lastName);
 	}
 }

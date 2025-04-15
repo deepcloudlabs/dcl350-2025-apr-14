@@ -20,4 +20,12 @@ public record Salary(double value, FiatCurrency currency) {
 		var currency = FiatCurrency.valueOf(currencyString);
 		return new Salary(value, currency);
 	}
+
+	public Salary multiply(double percentRate) {
+		return Salary.of(value * percentRate, currency);
+	}
+
+	public boolean lessThan(Salary other) {
+		return value < other.value;
+	}
 }

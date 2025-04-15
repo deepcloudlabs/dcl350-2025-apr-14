@@ -11,6 +11,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface ValueObject {
+public @interface Entity {
+	String[] identity();
 
+	boolean aggregate() default false;
 }

@@ -1,6 +1,8 @@
 package com.example.hr.domain;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.example.ddd.ValueObject;
 
@@ -9,6 +11,7 @@ import com.example.ddd.ValueObject;
 //             iii. immutable? -> 
 @ValueObject
 public final class TcKimlikNo {
+	private static final Map<String, TcKimlikNo> TC_KIMLIKNO_CACHE = new ConcurrentHashMap<>();
 	private final String value;
 
 	private TcKimlikNo(String value) {
@@ -16,9 +19,16 @@ public final class TcKimlikNo {
 	}
 
 	public static TcKimlikNo of(String value) {
+		// validation
 		if (!isValid(value))
 			throw new IllegalArgumentException("%s is not a valid identity no.".formatted(value));
-		return new TcKimlikNo(value); // always return a valid TcKimlikNo object
+		// object pooling
+		var cached = TC_KIMLIKNO_CACHE.get(value);
+		if (Objects.isNull(cached)) {
+			cached = new TcKimlikNo(value);
+			TC_KIMLIKNO_CACHE.put(value, cached);
+		}
+		return cached; // always return a valid TcKimlikNo object
 	}
 
 	public static boolean isValid(String value) {
