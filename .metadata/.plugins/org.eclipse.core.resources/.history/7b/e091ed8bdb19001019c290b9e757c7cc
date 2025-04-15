@@ -1,0 +1,9 @@
+package com.example.hr.repository;
+
+import com.example.ddd.Repository;
+import com.example.hr.domain.Employee;
+
+@Repository(entity=Employee.class)
+public interface EmployeeRepository {
+
+}
