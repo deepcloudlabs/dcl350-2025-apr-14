@@ -42,7 +42,6 @@ public class StandardHrApplication implements HrApplication {
 		Consumer<Employee> fireEmployee = employeeRepository::remove;
 		Consumer<Employee> publishEvent = firedEmployee -> eventPublisher.publishEvent(new EmployeeFiredEvent(firedEmployee));
 		employee.ifPresent(fireEmployee.andThen(publishEvent));
-		
 		return employee;
 	}
 
