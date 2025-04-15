@@ -25,4 +25,6 @@ replay_pid*
 /.metadata/
 /.metadata
 .mvn/
-.metadata
+.metadata/
+mvnw
+mvnw.cmd
