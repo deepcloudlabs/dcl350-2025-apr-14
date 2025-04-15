@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.example.hr.application.HrApplication;
+import com.example.hr.domain.Employee;
 import com.example.hr.domain.TcKimlikNo;
 import com.example.hr.dto.request.HireEmployeeRequest;
 import com.example.hr.dto.response.EmployeeResponse;
@@ -26,13 +27,14 @@ public class HrService {
 	}
 
 	public HireEmployeeResponse hireEmployee(HireEmployeeRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		var employee = modelMapper.map(request, Employee.class);
+		hrApplication.hireEmployee(employee);
+		return new HireEmployeeResponse("success", request.identity());
 	}
 
 	public FireEmployeeResponse fireEmployee(String identity) {
-		// TODO Auto-generated method stub
-		return null;
+		var firedEmployee = hrApplication.fireEmployee(TcKimlikNo.of(identity)).orElseThrow(() -> new IllegalArgumentException("Cannot fire: the employee (%s) does not exist.".formatted(identity)));
+		return modelMapper.map(firedEmployee, FireEmployeeResponse.class);
 	}
 
 }
