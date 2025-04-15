@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.hr.domain.event.HrEvent;
 import com.example.hr.hexagonal.Adapter;
 import com.example.hr.infra.EventPublisher;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -25,9 +26,12 @@ public class HrEventPublisherKafkaAdapter implements EventPublisher {
 
 	@Override
 	public void publishEvent(HrEvent event) {
-		var eventAsJson = objectMapper.writeValueAsString(event);
-		kafkaTemplate.send(hrEventsTopic, eventAsJson);
-
+		try {
+			var eventAsJson = objectMapper.writeValueAsString(event);
+			kafkaTemplate.send(hrEventsTopic, eventAsJson);
+		} catch (JsonProcessingException e) {
+			throw new IllegalStateException("Cannot convert event to json: %s".formatted(e.getMessage()));
+		}
 	}
 
 }
