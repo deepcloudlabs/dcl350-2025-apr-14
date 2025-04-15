@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=hr-core-subdomain/src&lt;com.example.hr.application{HrApplication.java[HrApplication" modifiers="513" timestamp="1744708700662"/>
+    <typeInfo handle="=hr-core-subdomain/src=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.hr.application{HrApplication.java[HrApplication" modifiers="513" timestamp="1744708700662"/>
+    <typeInfo handle="=hr-core-subdomain/src=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.hr.repository{EmployeeRepository.java[EmployeeRepository" modifiers="513" timestamp="1744709396311"/>
+    <typeInfo handle="=hr-core-subdomain/src=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.hr.infra{EventPublisher.java[EventPublisher" modifiers="513" timestamp="1744714840818"/>
 </typeInfoHistroy>
