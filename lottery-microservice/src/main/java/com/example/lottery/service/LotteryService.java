@@ -25,7 +25,7 @@ public class LotteryService {
 	}
 	
 	public List<LotteryModel> draw(int column){
-	    return IntStream.range(0, column).mapToObj(i -> draw()).toList();	
+	    return IntStream.range(0, column).mapToObj(_ -> draw()).toList();	
 	}
 	
 	public LotteryModel draw(){
