@@ -1,0 +1,13 @@
+{
+  "name": "hr-websocket-client-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ws-client": "node index.js"
+  },
+  "dependencies": {
+    "ws":  "^8.18.1"
+  },
+  "private": true
+}

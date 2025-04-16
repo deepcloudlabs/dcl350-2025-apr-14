@@ -15,13 +15,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HrEventPublisherInternalAdapter implements EventPublisher {
 	private final ApplicationEventPublisher eventPublisher;
 	private final ObjectMapper objectMapper;
-	private final String hrEventsTopic;
 	
-	public HrEventPublisherInternalAdapter(ApplicationEventPublisher eventPublisher, ObjectMapper objectMapper, 
-			@Value("${topicName}") String hrEventsTopic) {
+	public HrEventPublisherInternalAdapter(ApplicationEventPublisher eventPublisher, ObjectMapper objectMapper) {
 		this.eventPublisher = eventPublisher;
 		this.objectMapper = objectMapper;
-		this.hrEventsTopic = hrEventsTopic;
 	}
 
 	@Override

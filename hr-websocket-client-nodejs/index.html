@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            const span= document.querySelector("#event");
+            const ws = new WebSocket("ws://localhost:4001/hr/api/v1/events");
+            ws.onopen = function (session) {
+                span.innerHTML = "connection is open";
+                ws.onmessage = function (event) {
+                    span.innerHTML = event.data;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <span id="event">
+
+    </span>
+</body>
+</html>

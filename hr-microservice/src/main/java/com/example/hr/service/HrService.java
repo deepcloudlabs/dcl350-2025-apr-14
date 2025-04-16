@@ -8,9 +8,11 @@ import com.example.hr.application.HrApplication;
 import com.example.hr.domain.Employee;
 import com.example.hr.domain.TcKimlikNo;
 import com.example.hr.dto.request.HireEmployeeRequest;
+import com.example.hr.dto.response.EmployeeQLResponse;
 import com.example.hr.dto.response.EmployeeResponse;
 import com.example.hr.dto.response.FireEmployeeResponse;
 import com.example.hr.dto.response.HireEmployeeResponse;
+import com.example.hr.dto.response.PhotoResponse;
 
 @Service
 public class HrService {
@@ -38,6 +40,17 @@ public class HrService {
 	public FireEmployeeResponse fireEmployee(String identity) {
 		var firedEmployee = hrApplication.fireEmployee(TcKimlikNo.of(identity)).orElseThrow(() -> new IllegalArgumentException("Cannot fire: the employee (%s) does not exist.".formatted(identity)));
 		return modelMapper.map(firedEmployee, FireEmployeeResponse.class);
+	}
+
+	public PhotoResponse getEmployeePhoto(String identity) {
+		var employee = hrApplication.findEmployeeByIdentity(TcKimlikNo.of(identity))
+				.orElseThrow(()->new IllegalArgumentException("Cannot find employee"));
+		return new PhotoResponse(employee.getPhoto().toString());
+	}
+
+	public EmployeeQLResponse employeeById(String identity) {
+		var employee = hrApplication.findEmployeeByIdentity(TcKimlikNo.of(identity));
+		return modelMapper.map(employee,EmployeeQLResponse.class);
 	}
 
 }

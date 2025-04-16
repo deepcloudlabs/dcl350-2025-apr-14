@@ -16,6 +16,7 @@ import com.example.hr.dto.request.HireEmployeeRequest;
 import com.example.hr.dto.response.EmployeeResponse;
 import com.example.hr.dto.response.FireEmployeeResponse;
 import com.example.hr.dto.response.HireEmployeeResponse;
+import com.example.hr.dto.response.PhotoResponse;
 import com.example.hr.service.HrService;
 import com.example.validation.TcKimlikNo;
 
@@ -52,6 +53,11 @@ public class HrRestController {
 	public EmployeeResponse findEmployeeById(@PathVariable @TcKimlikNo String identity) {
 		return hrService.findById(identity);
 	}
+	
+	@GetMapping("/{identity}/photo")
+	public PhotoResponse getEmployeePhotoById(@PathVariable @TcKimlikNo String identity) {
+		return hrService.getEmployeePhoto(identity);
+	}	
 
 	@PostMapping
 	public HireEmployeeResponse hireEmployee(@RequestBody @Validated HireEmployeeRequest request) {
