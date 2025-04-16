@@ -1,6 +1,0 @@
-package com.example.hr.repository;
-
-@Repository(entity=Employee.class)
-public interface EmployeeRepository {
-
-}
