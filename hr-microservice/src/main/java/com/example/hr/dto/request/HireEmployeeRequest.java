@@ -6,7 +6,7 @@ import com.example.hr.domain.FiatCurrency;
 import com.example.validation.Iban;
 import com.example.validation.TcKimlikNo;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -20,7 +20,7 @@ public record HireEmployeeRequest(
 		@NotNull FiatCurrency currency,
 		List<String> departments,
 		@NotBlank String jobStyle,
-		@Min(2009) int birthYear,
+		@Max(2009) int birthYear,
 		@NotBlank String photo
 		) {
 

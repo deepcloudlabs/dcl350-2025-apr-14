@@ -41,6 +41,7 @@ public class ModelMapperConfig {
 		        .iban(request.iban())
 		        .birthYear(request.birthYear())
 		        .departments(request.departments())
+		        .jobStyle(request.jobStyle())
 		        .photo(request.photo())
 		        .build();
 	};
@@ -71,6 +72,7 @@ public class ModelMapperConfig {
 		        .iban(entity.getIban())
 		        .birthYear(entity.getBirthYear())
 		        .departments(entity.getDepartments())
+		        .jobStyle(entity.getJobStyle())
 		        .photo(entity.getPhoto())
 		        .build();
 	};
