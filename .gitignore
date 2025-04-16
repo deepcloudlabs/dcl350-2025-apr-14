@@ -30,3 +30,6 @@ mvnw
 mvnw.cmd
 target/
 .settings/
+/.metadata
+/.metadata/.plugins
+*.resources
