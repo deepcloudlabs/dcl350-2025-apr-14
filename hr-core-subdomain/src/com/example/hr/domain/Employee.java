@@ -36,6 +36,13 @@ public class Employee {
 		this.jobStyle = builder.jobStyle;
 		this.photo = builder.photo;
 	}
+	
+	
+
+	public Employee() {
+	}
+
+
 
 	public TcKimlikNo getIdentity() {
 		return identity;

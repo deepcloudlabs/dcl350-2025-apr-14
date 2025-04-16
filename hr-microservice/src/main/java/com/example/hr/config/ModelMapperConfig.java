@@ -107,7 +107,8 @@ public class ModelMapperConfig {
 				employee.getSalary().currency(),
 				employee.getDepartments().stream().map(Department::name).toList(),
 				employee.getJobStyle().name(),
-				employee.getBirthYear().value()
+				employee.getBirthYear().value(),
+				employee.getPhoto().toString()
 		);
 	} ;	
 	
@@ -120,6 +121,7 @@ public class ModelMapperConfig {
 		modelMapper.addConverter(Employee2EmployeeResponseConverter,Employee.class,EmployeeResponse.class);
 		modelMapper.addConverter(Employee2EmployeeQLResponseConverter, Employee.class, EmployeeQLResponse.class);
 		modelMapper.addConverter(Employee2EmployeeEntityConverter, Employee.class, EmployeeEntity.class);
+		modelMapper.addConverter(EmployeeEntity2EmployeeConverter, EmployeeEntity.class, Employee.class);
 		return modelMapper;
 	}
 }

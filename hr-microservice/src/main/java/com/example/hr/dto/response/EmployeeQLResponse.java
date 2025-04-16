@@ -13,7 +13,8 @@ public record EmployeeQLResponse(
 		FiatCurrency currency,
 		List<String> departments,
 		String jobStyle,
-		int birthYear	
+		int birthYear,
+		String photo
 		) {
 
 }

@@ -26,7 +26,8 @@ public class HrService {
 
 	public EmployeeResponse findById(String identity) {
 		var employee = hrApplication.findEmployeeByIdentity(TcKimlikNo.of(identity));
-		return modelMapper.map(employee,EmployeeResponse.class);
+		System.err.println(employee.get());
+		return modelMapper.map(employee.get(),EmployeeResponse.class);
 	}
 
 	@Transactional
@@ -50,7 +51,8 @@ public class HrService {
 
 	public EmployeeQLResponse employeeById(String identity) {
 		var employee = hrApplication.findEmployeeByIdentity(TcKimlikNo.of(identity));
-		return modelMapper.map(employee,EmployeeQLResponse.class);
+		System.out.println(employee.get());
+		return modelMapper.map(employee.get(),EmployeeQLResponse.class);
 	}
 
 }
