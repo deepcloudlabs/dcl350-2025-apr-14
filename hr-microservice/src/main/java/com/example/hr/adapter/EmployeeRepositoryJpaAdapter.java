@@ -3,7 +3,8 @@ package com.example.hr.adapter;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hr.domain.Employee;
@@ -13,8 +14,9 @@ import com.example.hr.hexagonal.Adapter;
 import com.example.hr.repository.EmployeeEntityRepository;
 import com.example.hr.repository.EmployeeRepository;
 
-@Service
+@Repository
 @Adapter(source = EmployeeRepository.class, target = EmployeeEntityRepository.class)
+@ConditionalOnProperty(value="persistenceStrategy", havingValue = "jpa")
 public class EmployeeRepositoryJpaAdapter implements EmployeeRepository {
 	private final EmployeeEntityRepository employeeEntityRepository;
 	private final ModelMapper modelMapper;

@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.hr.document.EmployeeDocument;
 import com.example.hr.domain.Department;
 import com.example.hr.domain.Employee;
 import com.example.hr.dto.request.HireEmployeeRequest;
@@ -111,6 +112,39 @@ public class ModelMapperConfig {
 				employee.getPhoto().toString()
 		);
 	} ;	
+
+	
+	private static final Converter<EmployeeDocument,Employee> EmployeeDocument2EmployeeConverter 
+	= context -> {
+		var document = context.getSource();
+		return new Employee.Builder()
+		        .identity(document.getIdentity())
+		        .fullName(document.getFirstName(), document.getLastName())
+		        .salary(document.getSalary(),document.getCurrency())
+		        .iban(document.getIban())
+		        .birthYear(document.getBirthYear())
+		        .departments(document.getDepartments())
+		        .jobStyle(document.getJobStyle())
+		        .photo(document.getPhoto())
+		        .build();
+	};
+
+	private static final Converter<Employee,EmployeeDocument> Employee2EmployeeDocumentConverter 
+	= context -> {
+		var employee = context.getSource();
+		var document = new EmployeeDocument();
+		document.setIdentity(employee.getIdentity().getValue());
+		document.setFirstName(employee.getFullName().firstName());
+		document.setLastName(employee.getFullName().lastName());
+		document.setIban(employee.getIban().getValue());
+		document.setSalary(employee.getSalary().value());
+		document.setCurrency(employee.getSalary().currency());
+		document.setDepartments(employee.getDepartments().stream().map(Department::name).toList());
+		document.setJobStyle(employee.getJobStyle().name());
+		document.setBirthYear(employee.getBirthYear().value());
+		document.setPhoto(employee.getPhoto().toString());
+		return document;
+	} ;
 	
 	@Bean 
 	ModelMapper modelMapper() {
@@ -122,6 +156,8 @@ public class ModelMapperConfig {
 		modelMapper.addConverter(Employee2EmployeeQLResponseConverter, Employee.class, EmployeeQLResponse.class);
 		modelMapper.addConverter(Employee2EmployeeEntityConverter, Employee.class, EmployeeEntity.class);
 		modelMapper.addConverter(EmployeeEntity2EmployeeConverter, EmployeeEntity.class, Employee.class);
+		modelMapper.addConverter(Employee2EmployeeDocumentConverter, Employee.class, EmployeeDocument.class);
+		modelMapper.addConverter(EmployeeDocument2EmployeeConverter, EmployeeDocument.class, Employee.class);
 		return modelMapper;
 	}
 }
