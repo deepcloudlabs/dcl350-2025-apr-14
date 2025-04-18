@@ -1,10 +1,12 @@
 package com.example.securitycard.service;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HrEventConsumerService {
+@ConditionalOnProperty(value="messagingStrategy", havingValue = "kafka")
+public class HrEventKafkaConsumerService {
 
 	@KafkaListener(topics = {"${hr-topic}"},groupId = "security-card")
 	public void handleHrEvent(String hrEvent) {
