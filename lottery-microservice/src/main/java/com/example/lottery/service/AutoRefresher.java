@@ -25,7 +25,7 @@ public class AutoRefresher {
 		this.restTemplate = restTemplate;
 	}
 	
-	@Scheduled(fixedRateString = "${refreshPeriod}")
+	//@Scheduled(fixedRateString = "${refreshPeriod}")
 	public void autoRefresh() {
 		restTemplate.postForEntity("http://%s:%d/%s/%s/actuator/refresh".formatted(host,port,context,path), new EmptyBody(),String.class);
 	}
