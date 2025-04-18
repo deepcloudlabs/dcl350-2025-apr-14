@@ -46,7 +46,7 @@ public class ReactiveCrmService {
 
 	public Mono<CustomerDocument> removeCustomerByEmail(String email) {
 		return customerDocumentRepository.findById(email).doOnSuccess(_ -> {
-			customerDocumentRepository.deleteById(email).doOnSuccess(_ -> sendCustomerReleasedEvent(email));
+			customerDocumentRepository.deleteById(email).doOnSuccess(_ -> sendCustomerReleasedEvent(email)).subscribe();
 		});
 	}
 
